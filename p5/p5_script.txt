@@ -1,0 +1,27 @@
+5. Створіть функцію з двома параметрами, яка буде ділити перший параметр на другий. 
+Обидва параметри та значення, що повертається, повинні мати тип FLOAT.
+Використайте конструкцію DROP FUNCTION IF EXISTS. Застосуйте функцію до атрибута quantity таблиці order_details .
+
+DROP FUNCTION IF EXISTS DivideArgs;
+
+DELIMITER //
+
+CREATE FUNCTION DivideArgs (arg1 FLOAT, arg2 FLOAT)
+RETURNS FLOAT
+NO SQL 
+BEGIN 
+	DECLARE result FLOAT;  
+    IF arg2 = 0 THEN
+		SET result = null;
+	ELSE
+		SET result = arg1 / arg2;
+	END IF;
+    RETURN result;
+END  //
+
+DELIMITER ;
+
+
+
+
+SELECT DivideArgs(quantity, 2.0) as divided_qty FROM order_details

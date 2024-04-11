@@ -1,0 +1,10 @@
+3. Напишіть SQL запит, вкладений в операторі FROM, який буде обирати рядки з умовою quantity>10 з \таблиці order_details.
+Для отриманих даних знайдіть середнє значення поля quantity — групувати слід за oder_id.
+
+SELECT AVG(sut_table.average_qty) AS avg_qty
+FROM (
+	SELECT order_id, AVG(quantity) AS average_qty
+    FROM order_details
+    WHERE quantity > 10
+    GROUP BY order_id
+    ) AS sut_table
